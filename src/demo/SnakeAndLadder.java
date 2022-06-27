@@ -1,56 +1,92 @@
 package demo;
 
+import java.util.Random;
+
 public class SnakeAndLadder {
 
 	static final int playersWinningPosition = 100;
+	static final int PLAYER1 = 1;
+    static final int PLAYER2 = 2;
+    static final int Snake = 2;
+    static final int Ladder = 1;
+    static final int Noplay= 0;
+    static int diceCount = 0;
 
+ 
+        public static int positionCheck(int dice,int position,int optionCheck)
+        {
 
+            if ((optionCheck == Ladder) && (position+dice)<=100)
+            {
+                System.out.print(" ladder!!!");
+                position = position + dice;
+            }
+            else if (optionCheck == Snake)
+            {
+                System.out.print("Snake");
+                position = position - dice;
+            }
+            else
+            {
+                System.out.print("Noplay");
+            }
+            if (position<0)
+            {
+                position =0;
+            }
+            System.out.println("position: "+position);
+            return position;
 
-    public static void main(String[] args) {
-        int playerPosition = 0;
-        int n;
-        System.out.println(+playerPosition+" " + "This is the players starting Position");
-        System.out.println("Rolls the dice to get number ");
-        int i = 0;
-        while (playerPosition != playersWinningPosition) {
-        	int dice = 1 + (int) (Math.random() * 6);
-        	 int checkOption = (int) Math.floor(Math.random() * 3);
-            
-            switch (checkOption) {
-                case 1:
-                    System.out.println(" To Play");
-                    System.out.println("Dice " + dice);
-                   
-                    if (checkOption == 0) {
-                        System.out.println("No Play");
-                        playerPosition = playerPosition;
-                        System.out.println("Player position is " + playerPosition);
-                    }
-                    else if (checkOption == 1) {
-                        System.out.println("its Ladder");
-                        if (playerPosition < playersWinningPosition)
-                            playerPosition = playerPosition + dice;
-                        else
-                            playerPosition = playerPosition - dice;
-                            System.out.println(" position of player is " + playerPosition);
-                    }
-                    else {
-                        System.out.println(" its Snake");
-                        playerPosition = playerPosition - dice;
-                        if (playerPosition < 0)
-                            playerPosition=0;
-                            System.out.println(" position of the player is " + playerPosition);
-                    }
-                    break;
-                case 2:
-                    System.out.println("exit");
-                    
-                case 3:
-                    System.out.println("Invalid input");
-                    break;
-            } i++ ;
         }
-        System.out.println("Player Position is " + playerPosition);
-        System.out.println("calculate Total Moves = " + i);
+
+        public static void main(String[] args)
+        {
+            int playerOnePosition = 0;
+            int playerTwoPosition = 0;
+            int player = PLAYER1;
+            System.out.println("playerOnePosition: "+playerOnePosition);
+            System.out.println("playerTwoPosition: "+playerTwoPosition);
+            Random ran = new Random();
+
+            while ((playerOnePosition<100) && (playerTwoPosition<100))
+            {
+
+                int dice = ran.nextInt(6)+1;
+                System.out.println("dice: "+dice);
+                ++diceCount;
+                int optionCheck = ran.nextInt(3);
+                System.out.println("optionCheck: "+optionCheck);
+
+                if(player == PLAYER1)
+                {
+
+                    playerOnePosition=positionCheck(dice,playerOnePosition,optionCheck);
+                    if ((optionCheck == Snake) || (optionCheck == Noplay))
+                    {
+                        player = PLAYER2;
+                    }
+                }
+                else if (player == PLAYER2) {
+                    playerTwoPosition=positionCheck(dice,playerTwoPosition,optionCheck);
+                    if ((optionCheck == Snake) || (optionCheck == Noplay))
+                    {
+                        player = PLAYER1;
+                    }
+                }
+
+            }
+            System.out.println();
+            System.out.println("Player One Position: "+playerOnePosition);
+            System.out.println("Player Two Position"+playerTwoPosition);
+            System.out.println("diceCount: "+diceCount);
+            if(playerOnePosition == 100)
+            {
+                System.out.println("Player One Wins");
+            }
+            else
+            {
+                System.out.println("Player Two Wins");
+            }
+        }
+
     }
-}
