@@ -4,10 +4,12 @@ public class SnakeAndLadder {
 
 	static final int playersWinningPosition = 100;
 
+
+
     public static void main(String[] args) {
         int playerPosition = 0;
         int n;
-        System.out.println(+playerPosition+" " + "players starting Position");
+        System.out.println(+playerPosition+" " + "This is the players starting Position");
         System.out.println("Rolls the dice to get number ");
         int i = 0;
         while (playerPosition != playersWinningPosition) {
@@ -16,7 +18,7 @@ public class SnakeAndLadder {
             
             switch (checkOption) {
                 case 1:
-                    System.out.println("Play");
+                    System.out.println(" To Play");
                     System.out.println("Dice " + dice);
                    
                     if (checkOption == 0) {
@@ -25,19 +27,19 @@ public class SnakeAndLadder {
                         System.out.println("Player position is " + playerPosition);
                     }
                     else if (checkOption == 1) {
-                        System.out.println("Ladder came");
+                        System.out.println("its Ladder");
                         if (playerPosition < playersWinningPosition)
                             playerPosition = playerPosition + dice;
                         else
                             playerPosition = playerPosition - dice;
-                            System.out.println("Player position is " + playerPosition);
+                            System.out.println(" position of player is " + playerPosition);
                     }
                     else {
-                        System.out.println("Snake came");
+                        System.out.println(" its Snake");
                         playerPosition = playerPosition - dice;
                         if (playerPosition < 0)
                             playerPosition=0;
-                            System.out.println("position  of player is " + playerPosition);
+                            System.out.println(" position of the player is " + playerPosition);
                     }
                     break;
                 case 2:
@@ -46,10 +48,9 @@ public class SnakeAndLadder {
                 case 3:
                     System.out.println("Invalid input");
                     break;
-            }
-            i++ ;
+            } i++ ;
         }
-        System.out.println(" Position of player is " + playerPosition);
-        System.out.println("Calculate Total Moves = " + i);
+        System.out.println("Player Position is " + playerPosition);
+        System.out.println("calculate Total Moves = " + i);
     }
 }
