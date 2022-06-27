@@ -2,38 +2,31 @@ package demo;
 
 public class SnakeAndLadder {
 
+	static final int PlayersWinningPosition = 100;
 	public static void main(String[] args) {
-		//players initial position
-		int playerposition=0;
-		 System.out.println("welcome to snake and ladder game");
-		 System.out.println("starting position of player is"+ " "+playerposition);
-		 
-		 //rolling the die 
-		int dice =(int)(Math.random()*6)+1;
-		System.out.println("the random dice generated is"+ " " + dice);
 
-		//player checks for the position
-		int checkOption=(int)(Math.random()*3);
-		if(checkOption == 0 ) {
-			System.out.println("No Play");
-			//player position would be the same
-			playerposition = playerposition;
-			System.out.println("the current position of the player is"+ " "+playerposition);
+		int playerPosition = 0;
+		System.out.println("Players starting Position is " + playerPosition);
+		System.out.println("Roll dice to get number ");
+		while (playerPosition != PlayersWinningPosition) {
+			int number = 1 + (int) (Math.random() * 6);
+			int option = (int) Math.floor(Math.random() * 3);
+			if (option == 0) {
+				playerPosition = playerPosition;
+			} else if (option == 1) {
+				System.out.println("climb Ladder");
+				if (playerPosition < PlayersWinningPosition) {
+					playerPosition = playerPosition + number;
+				} else {
+					playerPosition = playerPosition - number;
+				}
+			} else {
+				System.out.println("Bite the Snake");
+				playerPosition = playerPosition - number;
+				if (playerPosition < 0)
+					playerPosition = 0;
 			}
-		else if(checkOption == 1) {
-			System.out.println("Ladder");
-			//position of the ladder would be
-			playerposition = playerposition + dice;
-			System.out.println("players position is"  +" "+ playerposition  );
 		}
-		else if(checkOption == 2 ) {
-		 System.out.println("Snake");
-		 //players position would be
-		 playerposition=playerposition - dice;
-		 System.out.println("playerposition for snke would be"+ " " +playerposition);
-		}
-			
-			
-	}
-
+		System.out.println("Player's current position is " + playerPosition);
+}
 }
